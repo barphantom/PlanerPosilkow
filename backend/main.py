@@ -41,3 +41,6 @@ def add_meal(meal: Meal):
     memory_db["meals"].append(meal)
     return meal
 
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
