@@ -32,5 +32,12 @@ memory_db = {"meals": []}
 
 
 @app.get("/meals", response_model=Meals)
-async def get_meals():
+def get_meals():
     return Meals(meals=memory_db["meals"])
+
+
+@app.post("/meals", response_model=Meal)
+def add_meal(meal: Meal):
+    memory_db["meals"].append(meal)
+    return meal
+
