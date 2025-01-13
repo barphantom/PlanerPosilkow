@@ -8,7 +8,7 @@ from typing import List
 app = FastAPI()
 
 origins = [
-    "http://localhost:3000", # tu ma być host aplikacji react
+    "http://localhost:5173",  # tu ma być host aplikacji react
 ]
 
 app.add_middleware(
