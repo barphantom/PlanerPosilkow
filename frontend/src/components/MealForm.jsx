@@ -1,7 +1,7 @@
 import React from "react";
 import {useState} from "react";
 
-export default function MealForm() {
+export default function MealForm({ addMeal }) {
     const [formData, setFormData] = useState({
         mealName: "",
         ingredient: "",
@@ -18,7 +18,7 @@ export default function MealForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        addMeal(formData.mealName);
     }
 
     return (
