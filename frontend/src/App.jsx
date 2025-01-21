@@ -37,7 +37,7 @@ const fetchMeals = async () => {
 
 const addMeal = async (meal) => {
     try {
-        await api.post('meals', {mealName: meal})
+        await api.post('meals', meal)
         fetchMeals();
     } catch (error) {
         console.error("Error adding fruit", error)

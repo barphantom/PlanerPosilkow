@@ -21,7 +21,9 @@ app.add_middleware(
 
 
 class Meal(BaseModel):
-    name: str
+    mealName: str
+    ingredient: str
+    weight: float
 
 
 class Meals(BaseModel):

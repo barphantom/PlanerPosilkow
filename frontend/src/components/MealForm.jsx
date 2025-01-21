@@ -18,7 +18,20 @@ export default function MealForm({ addMeal }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addMeal(formData.mealName);
+        // addMeal(formData.mealName);
+        const meal = {
+            mealName: formData.mealName,
+            ingredient: formData.ingredient,
+            weight: formData.weight,
+        }
+
+        setFormData({
+            mealName: "",
+            ingredient: "",
+            weight: "",
+        });
+
+        addMeal(meal);
     }
 
     return (
