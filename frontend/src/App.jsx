@@ -5,6 +5,9 @@ import Header from "./components/Header.jsx";
 import MealForm from "./components/MealForm.jsx";
 import MealList from "./components/MealList.jsx";
 import api from "./api.js";
+import LoginForm from "./components/LoginForm/LoginForm";
+import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
+
 
 // const App = () => {
 //   return (
@@ -20,8 +23,6 @@ import api from "./api.js";
 // };
 //
 // export default App;
-
-
 
 export default function App() {
     const [ meals, setMeals ] = useState([])
@@ -53,6 +54,8 @@ useEffect(() => {
             <Header />
             <MealForm addMeal={addMeal}/>
             <MealList meals={meals}/>
+            <LoginForm />
+            <RegistrationForm />
         </>
     )
 }
