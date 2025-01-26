@@ -15,7 +15,7 @@ const router = createBrowserRouter([
         errorElement: <NotFoundPage />
     },
     {
-        path: '/add-meal',
+        path: '/',
         element: <App />,
         errorElement: <NotFoundPage />
     },

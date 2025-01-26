@@ -7,55 +7,66 @@ import MealList from "./components/MealList.jsx";
 import api from "./api.js";
 import LoginForm from "./components/LoginForm/LoginForm";
 import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
+import { useNavigate } from 'react-router-dom';
 
-
-// const App = () => {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <h1>Meals Management App</h1>
-//       </header>
-//       <main>
-//         <FruitList />
-//       </main>
-//     </div>
-//   );
-// };
-//
-// export default App;
 
 export default function App() {
     const [ meals, setMeals ] = useState([])
+    const navigate = useNavigate();
 
-const fetchMeals = async () => {
-    try {
-        const response = await api.get('/meals')
-        setMeals(response.data.meals)
-    } catch (error) {
-        console.error("Error fetching meals", meals)
+    const fetchMeals = async () => {
+        try {
+            const response = await api.get('/meals')
+            setMeals(response.data.meals)
+        } catch (error) {
+            console.error("Error fetching meals", meals)
+        }
     }
-}
 
-const addMeal = async (meal) => {
-    try {
-        await api.post('meals', meal)
-        fetchMeals();
-    } catch (error) {
-        console.error("Error adding fruit", error)
+    const addMeal = async (meal) => {
+        try {
+            await api.post('/meals', meal)
+            fetchMeals();
+        } catch (error) {
+            console.error("Error adding fruit", error)
+        }
     }
-}
 
-useEffect(() => {
-    fetchMeals()
-}, []);
+    useEffect(() => {
+        fetchMeals()
+    }, []);
+
+    useEffect(() => {
+        const verifyToken = async () => {
+            const token = localStorage.getItem("token");
+
+            try {
+                const response = await fetch("http://localhost:8000/verify-token", {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error("Token verification failed.");
+                }
+            } catch (error) {
+                localStorage.removeItem("token")
+                navigate("/login")
+            }
+        }
+
+        verifyToken();
+    }, [navigate]);
+
 
     return (
         <>
             <Header />
             <MealForm addMeal={addMeal}/>
             <MealList meals={meals}/>
-            <LoginForm />
-            <RegistrationForm />
         </>
     )
 }

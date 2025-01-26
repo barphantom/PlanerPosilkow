@@ -23,19 +23,32 @@ export default function LoginForm() {
         return true
     }
 
-    const handleLogin = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!validateForm()) return;
+        setLoading(true);
+
+        const formData = new URLSearchParams();
+        formData.append('username', username);
+        formData.append('password', password);
+
         try {
-            const response = await api.post("/login", {
-                email: username,
-                password,
+            const response = await api.post("/login", formData.toString(), {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
             });
+
+            setLoading(false);
 
             const token = response.data.access_token;
             localStorage.setItem("token", token);
             console.log("Zalogowano");
+            navigate("/")
 
         } catch (error) {
+            setLoading(false)
+            setError("An error occurred. Please try again.")
             console.log("Błąd logowania", error);
         }
     }
@@ -43,7 +56,7 @@ export default function LoginForm() {
 
     return (
         <div className="wrapper">
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleSubmit}>
                 <h1>Login</h1>
                 <div className="input-box">
                     <input type="text" placeholder="Username" required
@@ -59,10 +72,13 @@ export default function LoginForm() {
                     />
                     <FaLock className="icon"/>
                 </div>
-                <button type="submit">Login</button>
+                <button type="submit">
+                    {loading ? "Logging in..." : "Login"}
+                </button>
                 <div className="register-link">
                     <p>Don't have an account? <Link to="/register">Register</Link></p>
                 </div>
+                {error && <p style={{color: "red"}}>{error}</p>}
             </form>
         </div>
     );
