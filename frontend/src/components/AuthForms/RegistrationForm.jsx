@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import './RegistrationForm.css';
 import { FaUser, FaLock } from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
 import api from "../../api.js";
@@ -57,31 +56,33 @@ export default function RegistrationForm() {
     }
 
     return (
-      <div className="wrapper">
-          <form onSubmit={handleSubmit}>
-              <h1>Registration</h1>
-              <div className="input-box">
-                  <input type="text" name="username" placeholder="Username" required
-                    value={formData.username}
-                    onChange={handleChange}
-                  />
-                  <FaUser className="icon"/>
-              </div>
-              <div className="input-box">
-                  <input type="password" name="password" placeholder="Password" required
-                    value={formData.password}
-                    onChange={handleChange}
-                  />
-                  <FaLock className="icon"/>
-              </div>
-              <button type="submit">
-                  {loading ? "Registration in progress..." : "Register"}
-              </button>
-              <div className="register-link">
-                  <p>Already have an account? <Link to="/login">Log in</Link></p>
-              </div>
-              {error ? <p style={{color: "red"}}>{error}</p> : ""}
-          </form>
-      </div>
+        <div className="layout">
+            <div className="wrapper register">
+              <form onSubmit={handleSubmit}>
+                  <h1>Registration</h1>
+                  <div className="input-box">
+                      <input type="text" name="username" placeholder="Username" required
+                        value={formData.username}
+                        onChange={handleChange}
+                      />
+                      <FaUser className="icon"/>
+                  </div>
+                  <div className="input-box">
+                      <input type="password" name="password" placeholder="Password" required
+                        value={formData.password}
+                        onChange={handleChange}
+                      />
+                      <FaLock className="icon"/>
+                  </div>
+                  <button type="submit">
+                      {loading ? "Registration in progress..." : "Register"}
+                  </button>
+                  <div className="register-link">
+                      <p>Already have an account? <Link to="/login">Log in</Link></p>
+                  </div>
+                  {error ? <p style={{color: "red"}}>{error}</p> : ""}
+              </form>
+            </div>
+        </div>
     );
 }

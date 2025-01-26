@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import './LoginForm.css';
+import './AuthForm.css';
 import { FaUser, FaLock } from "react-icons/fa";
 import api from "../../api.js";
 import { Link } from "react-router-dom"
@@ -55,31 +55,33 @@ export default function LoginForm() {
 
 
     return (
-        <div className="wrapper">
-            <form onSubmit={handleSubmit}>
-                <h1>Login</h1>
-                <div className="input-box">
-                    <input type="text" placeholder="Username" required
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <FaUser className="icon"/>
-                </div>
-                <div className="input-box">
-                    <input type="password" placeholder="Password" required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <FaLock className="icon"/>
-                </div>
-                <button type="submit">
-                    {loading ? "Logging in..." : "Login"}
-                </button>
-                <div className="register-link">
-                    <p>Don't have an account? <Link to="/register">Register</Link></p>
-                </div>
-                {error && <p style={{color: "red"}}>{error}</p>}
-            </form>
+        <div className="layout">
+            <div className="wrapper login">
+                <form onSubmit={handleSubmit}>
+                    <h1>Login</h1>
+                    <div className="input-box">
+                        <input type="text" placeholder="Username" required
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        />
+                        <FaUser className="icon"/>
+                    </div>
+                    <div className="input-box">
+                        <input type="password" placeholder="Password" required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <FaLock className="icon"/>
+                    </div>
+                    <button type="submit">
+                        {loading ? "Logging in..." : "Login"}
+                    </button>
+                    <div className="register-link">
+                        <p>Don't have an account? <Link to="/register">Register</Link></p>
+                    </div>
+                    {error && <p style={{color: "red"}}>{error}</p>}
+                </form>
+            </div>
         </div>
     );
 }

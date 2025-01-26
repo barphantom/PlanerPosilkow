@@ -3,9 +3,10 @@ import { createRoot } from 'react-dom/client'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import './index.css'
 import App from './App.jsx'
-import LoginForm from "./components/LoginForm/LoginForm.jsx";
+import AddMeal from "./components/AddMeal/AddMeal.jsx";
+import LoginForm from "./components/AuthForms/LoginForm.jsx";
+import RegistrationForm from "./components/AuthForms/RegistrationForm.jsx";
 import NotFoundPage from "./components/NotFoundPage.jsx";
-import RegistrationForm from "./components/RegistrationForm/RegistrationForm.jsx";
 
 
 const router = createBrowserRouter([
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/',
-        element: <App />,
+        element: <AddMeal />,
         errorElement: <NotFoundPage />
     },
     {

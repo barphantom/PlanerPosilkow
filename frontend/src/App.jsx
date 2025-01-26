@@ -1,12 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import FruitList from './components/Meals.jsx';
 import Header from "./components/Header.jsx";
 import MealForm from "./components/MealForm.jsx";
 import MealList from "./components/MealList.jsx";
 import api from "./api.js";
-import LoginForm from "./components/LoginForm/LoginForm";
-import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
 import { useNavigate } from 'react-router-dom';
 
 
