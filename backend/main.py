@@ -18,7 +18,7 @@ from schemas import UserCreate, UserResponse, MealCreate, MealResponse, Token
 
 # -------- Autoryzacja --------------
 from auth import (hash_password, verify_password, create_access_token, get_current_user,
-                  ACCESS_TOKEN_EXPIRE_MINUTES, oauth2_scheme, authenticate_user)
+                  ACCESS_TOKEN_EXPIRE_MINUTES, oauth2_scheme, authenticate_user, verify_token)
 
 # Tworzymy tabele, jeśli ich nie ma
 Base.metadata.create_all(bind=engine)
@@ -213,8 +213,15 @@ def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: Sessio
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
         data={"sub": str(user.id)}, expires_delta=access_token_expires
-    )eeqe
+    )
     return Token(access_token=access_token, token_type="bearer")
+
+
+@app.get("/verify-token")
+def verify_token_endpoint(token: Annotated[str, Depends(oauth2_scheme)], db: Session = Depends(get_db)):
+    user = verify_token(token, db)
+    return {"message": "Token is valid", "user_id": user.id}
+
 
 
 @app.post("/meals")
