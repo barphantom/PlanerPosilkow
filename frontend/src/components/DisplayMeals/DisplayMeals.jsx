@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import api from "../../api";
 import "./DisplayMeals.css";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LinkButton from "../LinkButton.jsx";
 import LogOutButton from "../LogOutButton.jsx";
-
 
 export default function DisplayMeals() {
     const [meals, setMeals] = useState([]);
@@ -29,8 +28,12 @@ export default function DisplayMeals() {
                 localStorage.removeItem("token")
                 navigate("/login")
             }
-        }
+        };
 
+        verifyToken();
+    }, [navigate]);
+
+    useEffect(() => {
         const fetchMeals = async () => {
             try {
                 const token = localStorage.getItem("token");
@@ -43,12 +46,23 @@ export default function DisplayMeals() {
             }
         };
 
-
-
-        verifyToken();
         fetchMeals();
-    }, [navigate]);
+    }, []);
 
+    const handleDelete = async (mealId) => {
+        const confirmDelete = window.confirm("Czy na pewno chcesz usunąć ten posiłek?");
+        if (!confirmDelete) return;
+
+        try {
+            const token = localStorage.getItem("token");
+            await api.delete(`/meals/${mealId}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            setMeals(meals.filter(meal => meal.id !== mealId));
+        } catch (error) {
+            console.error("Błąd podczas usuwania posiłku:", error);
+        }
+    };
 
     return (
         <div>
@@ -61,7 +75,9 @@ export default function DisplayMeals() {
                     <ul>
                         {meals.map((meal) => (
                             <li key={meal.id} className="meal-display-item">
-                                <p className="meal-display-name">{meal.name}</p>
+                                <div className="meal-header">
+                                    <p className="meal-display-name">{meal.name}</p>
+                                </div>
                                 <ul className="ingredient-display-list">
                                     {meal.ingredients.map((ingredient, index) => (
                                         <li key={index} className="ingredient-display-item">
@@ -69,6 +85,10 @@ export default function DisplayMeals() {
                                         </li>
                                     ))}
                                 </ul>
+                                <div className="meal-actions">
+                                    <button onClick={() => navigate(`/edit-meal/${meal.id}`)} className="edit-button">Edytuj</button>
+                                    <button onClick={() => handleDelete(meal.id)} className="delete-button">Usuń</button>
+                                </div>
                             </li>
                         ))}
                     </ul>

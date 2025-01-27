@@ -1,0 +1,54 @@
+.edit-meal-container {
+    max-width: 500px;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.meal-name-input-ed {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.ingredient-row-ed {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.ingredient-row-ed input {
+    flex: 1;
+    padding: 5px;
+}
+
+.remove-button-ed {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.add-ingredient-button-ed,
+.save-button-ed {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.add-ingredient-button-ed {
+    background: #4CAF50;
+}
+
+.save-button-ed {
+    background: #007BFF;
+}

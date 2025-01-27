@@ -10,30 +10,30 @@ import { useNavigate } from 'react-router-dom';
 
 
 export default function App() {
-    const [ meals, setMeals ] = useState([])
+    // const [ meals, setMeals ] = useState([])
     const navigate = useNavigate();
 
-    const fetchMeals = async () => {
-        try {
-            const response = await api.get('/meals')
-            setMeals(response.data.meals)
-        } catch (error) {
-            console.error("Error fetching meals", meals)
-        }
-    }
+    // const fetchMeals = async () => {
+    //     try {
+    //         const response = await api.get('/meals')
+    //         setMeals(response.data.meals)
+    //     } catch (error) {
+    //         console.error("Error fetching meals", meals)
+    //     }
+    // }
 
-    const addMeal = async (meal) => {
-        try {
-            await api.post('/meals', meal)
-            fetchMeals();
-        } catch (error) {
-            console.error("Error adding fruit", error)
-        }
-    }
+    // const addMeal = async (meal) => {
+    //     try {
+    //         await api.post('/meals', meal)
+    //         fetchMeals();
+    //     } catch (error) {
+    //         console.error("Error adding fruit", error)
+    //     }
+    // }
 
-    useEffect(() => {
-        fetchMeals()
-    }, []);
+    // useEffect(() => {
+    //     fetchMeals()
+    // }, []);
 
     useEffect(() => {
         const verifyToken = async () => {

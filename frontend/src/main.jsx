@@ -8,6 +8,7 @@ import DisplayMeals from "./components/DisplayMeals/DisplayMeals.jsx";
 import LoginForm from "./components/AuthForms/LoginForm.jsx";
 import RegistrationForm from "./components/AuthForms/RegistrationForm.jsx";
 import NotFoundPage from "./components/NotFoundPage.jsx";
+import EditMeal from "./components/EditMeal/EditMeal.jsx";
 
 
 const router = createBrowserRouter([
@@ -29,6 +30,11 @@ const router = createBrowserRouter([
     {
         path: '/library',
         element: <DisplayMeals />,
+        errorElement: <NotFoundPage />
+    },
+    {
+        path: '/edit-meal/:mealId',
+        element: <EditMeal />,
         errorElement: <NotFoundPage />
     }
 ]);
