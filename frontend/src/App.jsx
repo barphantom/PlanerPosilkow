@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import Header from "./components/Header.jsx";
+import AddMeal from "./components/AddMeal/AddMeal.jsx";
+import LogOutButton from "./components/LogOutButton.jsx";
 import MealForm from "./components/MealForm.jsx";
 import MealList from "./components/MealList.jsx";
 import api from "./api.js";
@@ -61,9 +63,11 @@ export default function App() {
 
     return (
         <>
+            <LogOutButton />
             <Header />
-            <MealForm addMeal={addMeal}/>
-            <MealList meals={meals}/>
+            <AddMeal />
+            {/*<MealForm addMeal={addMeal}/>*/}
+            {/*<MealList meals={meals}/>*/}
         </>
     )
 }
