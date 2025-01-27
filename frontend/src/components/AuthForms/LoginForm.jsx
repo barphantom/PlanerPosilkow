@@ -48,7 +48,11 @@ export default function LoginForm() {
 
         } catch (error) {
             setLoading(false)
-            setError("An error occurred. Please try again.")
+            if (error.response && error.response.status === 401) {
+                setError("Użytkownik nie istnieje lub login i hasło nieprawidłowe!");
+            } else {
+                setError("Wystąpił błąd. Spróbuj ponownie.");
+            }
             console.log("Błąd logowania", error);
         }
     }
@@ -62,14 +66,14 @@ export default function LoginForm() {
                     <div className="input-box">
                         <input type="text" placeholder="Username" required
                         value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        onChange={(e) => {setUsername(e.target.value); setError("")}}
                         />
                         <FaUser className="icon"/>
                     </div>
                     <div className="input-box">
                         <input type="password" placeholder="Password" required
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => {setPassword(e.target.value); setError("");}}
                         />
                         <FaLock className="icon"/>
                     </div>

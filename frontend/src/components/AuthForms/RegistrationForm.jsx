@@ -32,6 +32,7 @@ export default function RegistrationForm() {
             ...prevState,
             [name]: value,
         }));
+        setError("");
     }
 
     const handleSubmit = async (e) => {
